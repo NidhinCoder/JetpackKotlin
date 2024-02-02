@@ -1,4 +1,4 @@
-package com.example.interviewdemo.ui.theme
+package com.example.interviewdemo.uilayer.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
