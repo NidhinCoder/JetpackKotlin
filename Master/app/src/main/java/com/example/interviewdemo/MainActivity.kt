@@ -11,6 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.interviewdemo.uilayer.theme.InterviewDemoTheme
+import dagger.hilt.android.AndroidEntryPoint
+
+//After adding hilt dependencies
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
