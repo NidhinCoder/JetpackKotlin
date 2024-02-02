@@ -4,5 +4,5 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.9.0" apply false
 
     //nidhin
-    id("com.google.dagger.hilt.android") version "2.4.4" apply false
+    id("com.google.dagger.hilt.android") version "2.48" apply false
 }
