@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MessageCard("Nidhin")
+            MessageCard("Tom","Jerry")
         }
     }
 }
@@ -28,9 +28,20 @@ fun MessageCard(text: String)
     Text("Hello$text")
 }
 
+
+//Layouts
+@Composable
+fun MessageCard(text1:String, text2:String)
+{
+    Text(text1)
+    Text(text2)
+}
+
+
+
 @Preview
 @Composable
 fun PreviewMessageCard()
 {
-    MessageCard("Nidhin from Preview")
+    MessageCard("Tom","Jerry")
 }
