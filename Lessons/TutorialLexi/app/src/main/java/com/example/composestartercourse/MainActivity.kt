@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Message
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -33,8 +34,11 @@ fun MessageCard(text: String)
 @Composable
 fun MessageCard(text1:String, text2:String)
 {
-    Text(text1)
-    Text(text2)
+    Column()
+    {
+        Text(text1)
+        Text(text2)
+    }
 }
 
 
