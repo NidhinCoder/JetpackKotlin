@@ -1,4 +1,4 @@
-package com.example.interviewdemo.ui.theme
+package com.example.interviewdemo.uilayer.theme
 
 import android.app.Activity
 import android.os.Build

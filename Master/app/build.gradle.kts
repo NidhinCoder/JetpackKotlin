@@ -1,6 +1,12 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
+    //nidhin
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
+
+
 }
 
 android {
@@ -66,4 +72,20 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    //nidhin
+    implementation("com.google.dagger:hilt-android:2.48.1")
+
+    //DSL vs Kotlin Compiler KSP (Kotlin Symbol processing) Annotation processing
+    kapt("com.google.dagger:hilt-android-compiler:2.48.1")
+
+    //gson library
+    implementation ("com.google.code.gson:gson:2.10.1")
+
+    //co-routine libraries
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+
+
 }
