@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
@@ -24,11 +25,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.composestartercourse.ui.theme.ComposeStarterCourseTheme
 
+data class MyMessage(val author:String, val body:String)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MessageCard("Tom","Jerry")
+            MessageCard(MyMessage("Tom","Jerry"))
         }
     }
 }
@@ -42,7 +44,7 @@ fun MessageCard(text: String)
 
 //Layouts
 @Composable
-fun MessageCard(text1:String, text2:String)
+fun MessageCard(msg: MyMessage)
 {
     Row()
     {
@@ -56,8 +58,9 @@ fun MessageCard(text1:String, text2:String)
         Spacer(modifier = Modifier.width(8.dp))
         Column()
         {
-            Text(text1)
-            Text(text2)
+            Text(msg.author)
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(msg.body)
         }
     }
 }
@@ -68,5 +71,5 @@ fun MessageCard(text1:String, text2:String)
 @Composable
 fun PreviewMessageCard()
 {
-    MessageCard("Tom","Jerry")
+    MessageCard(MyMessage("Tom","Jerry"))
 }
