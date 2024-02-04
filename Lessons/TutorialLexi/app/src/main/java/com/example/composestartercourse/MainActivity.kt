@@ -1,5 +1,6 @@
 package com.example.composestartercourse
 
+import SampleData
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Message
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -28,6 +30,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.composestartercourse.ui.theme.ComposeStarterCourseTheme
+import androidx.compose.foundation.lazy.items
+
 
 data class MyMessage(val author:String, val body:String)
 class MainActivity : ComponentActivity() {
@@ -36,7 +40,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeStarterCourseTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    MessageCard(MyMessage("Tom", "Jerry"))
+                    //MessageCard(MyMessage("Tom", "Jerry"))
+                    Conversation(SampleData.conversationSample)
                 }
             }
         }
@@ -63,9 +68,9 @@ fun MessageCard(msg: MyMessage)
             painter = painterResource(R.drawable.img),
             contentDescription = "Contact profile picture",
             modifier = Modifier
-                            .size(40.dp)
-                            .clip(CircleShape)
-                            .border(1.5.dp,MaterialTheme.colorScheme.primary)
+                .size(40.dp)
+                .clip(CircleShape)
+                .border(1.5.dp, MaterialTheme.colorScheme.primary)
         )
         Spacer(modifier = Modifier.width(8.dp))
         Column()
@@ -89,6 +94,16 @@ fun MessageCard(msg: MyMessage)
     }
 }
 
+//Lazy Columns and Lazy rows render items only when visible on screen
+@Composable
+fun Conversation(messages:List<MyMessage>)
+{
+    LazyColumn{
+        items(messages){message ->
+            MessageCard(message)
+        }
+    }
+}
 
 @Preview(name = "Light Mode")
 @Preview(
@@ -102,7 +117,8 @@ fun PreviewMessageCard()
 {
     ComposeStarterCourseTheme {
         Surface {
-            MessageCard(MyMessage("Tom", "Jerry"))
+            //MessageCard(MyMessage("Tom", "Jerry"))
+            Conversation(messages = SampleData.conversationSample)
         }
     }
 }
