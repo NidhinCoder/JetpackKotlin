@@ -1,5 +1,6 @@
 package com.example.interviewdemo.uilayer.uicompose
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,6 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +33,7 @@ import com.example.interviewdemo.R
 import com.example.interviewdemo.uilayer.viewmodel.MainViewModel
 
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(uiState: State<MainViewModel.InterviewState>) {
     Box() {
@@ -73,46 +77,52 @@ fun HomeScreen(uiState: State<MainViewModel.InterviewState>) {
                     .width(520.dp)
             )
             {
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(3),
+                val pagerState = rememberPagerState(pageCount = { 2 })
+                HorizontalPager(state = pagerState) { page ->
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(3),
 
-                    // content padding
-                    contentPadding = PaddingValues(
-                        start = 12.dp,
-                        top = 16.dp,
-                        end = 12.dp,
-                        bottom = 16.dp
-                    ),
-                    content = {
-                        items(uiState.value.homeData?.size?:0) { index ->
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(4.dp),
+                        // content padding
+                        contentPadding = PaddingValues(
+                            start = 12.dp,
+                            top = 16.dp,
+                            end = 12.dp,
+                            bottom = 16.dp
+                        ),
+                        content = {
+                            items(uiState.value.homeData?.size?:0) { index ->
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(4.dp),
                                     verticalArrangement = Arrangement.Center,
 
 
-                            ) {
-                                Image(
-                                    //painter = painterResource(id = uiState.value.homeData?.getOrNull(index)?.image?:R.drawable.seats),
-                                    painter = painterResource(id = getDrawable(uiState)),
-                                    contentDescription = "",
-                                    contentScale = ContentScale.FillBounds//To set the width and height stretch
-                                )
+                                    ) {
+                                    Image(
+                                        //painter = painterResource(id = uiState.value.homeData?.getOrNull(index)?.image?:R.drawable.seats),
+                                        painter = painterResource(id = getDrawable(uiState)),
+                                        contentDescription = "",
+                                        contentScale = ContentScale.FillBounds//To set the width and height stretch
+                                    )
 
-                                Text(
-                                    //Study
-                                    text = uiState.value.homeData?.getOrNull(index)?.title?:"",
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 30.sp,
-                                    color = Color(0xFFFFFFFF),
-                                    textAlign = TextAlign.Center,
-                                    modifier = Modifier.padding(16.dp)
-                                )
+                                    Text(
+                                        //Study
+                                        text = uiState.value.homeData?.getOrNull(index)?.title?:"",
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 30.sp,
+                                        color = Color(0xFFFFFFFF),
+                                        textAlign = TextAlign.Center,
+                                        modifier = Modifier.padding(16.dp)
+                                    )
+                                }
                             }
                         }
-                    }
-                )
+                    )
+
+                }
+
+
             }
 
             //Right sidebar

@@ -61,11 +61,9 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HorizontalPagerScreen(uiState: State<MainViewModel.InterviewState>) {
-    val pagerState = rememberPagerState(pageCount = { 2 })
-    HorizontalPager(state = pagerState) { page ->
-        //ViewPagerItem(page = page)
-        HomeScreen(uiState = uiState)
-    }
+
+    HomeScreen(uiState = uiState)
+
 }
 
 @Composable
