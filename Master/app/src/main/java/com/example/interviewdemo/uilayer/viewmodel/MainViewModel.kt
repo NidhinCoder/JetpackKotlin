@@ -3,19 +3,25 @@ package com.example.interviewdemo.uilayer.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.interviewdemo.datalayer.Repository
+import com.example.interviewdemo.datalayer.Models.Feature
 import com.example.interviewdemo.domainlayer.UseCase
 import com.google.gson.Gson
-import kotlinx.coroutines.flow.collect
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModel @Inject constructor(private val useCase: UseCase, private val gson: Gson) :
     ViewModel() {
 
+
+    var _uiState = MutableStateFlow(InterviewState())
+
     fun getHomeData() {
         viewModelScope.launch {
-            useCase.getHomeData().collect {features->
+            useCase.getHomeData().collect { features ->
                 //Declare a ui state
                 //Into the ui state add the list
 
@@ -23,9 +29,13 @@ class MainViewModel @Inject constructor(private val useCase: UseCase, private va
                 //Implement a horizontal pager
 
                 Log.e("Home Data", gson.toJson(features))
+
+
+                _uiState.update { it.copy(homeData = features) }
             }
         }
 
-
     }
+
+    data class InterviewState(var homeData: List<Feature>? = null, var isLoading: Boolean = false)
 }

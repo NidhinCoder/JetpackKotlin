@@ -3,6 +3,7 @@ package com.example.interviewdemo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -15,20 +16,34 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.interviewdemo.uilayer.theme.InterviewDemoTheme
+import com.example.interviewdemo.uilayer.uicompose.HomeScreen
+import com.example.interviewdemo.uilayer.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 //After adding hilt dependencies
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //Here "by" is a delegate initializer
+        //concept of get and set
+        //https://kotlinlang.org/docs/delegation.html#overriding-a-member-of-an-interface-implemented-by-delegation
+        val viewModel:MainViewModel by viewModels()
+        viewModel.getHomeData()
+
         setContent {
+            val uiState = viewModel._uiState.collectAsState()
+
             InterviewDemoTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -36,7 +51,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     //Greeting("Android")
-                    HorizontalPagerScreen()
+                    HorizontalPagerScreen(uiState)
                 }
             }
         }
@@ -45,10 +60,11 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HorizontalPagerScreen() {
-    val pagerState = rememberPagerState(pageCount = { 10 })
+fun HorizontalPagerScreen(uiState: State<MainViewModel.InterviewState>) {
+    val pagerState = rememberPagerState(pageCount = { 2 })
     HorizontalPager(state = pagerState) { page ->
-        ViewPagerItem(page = page)
+        //ViewPagerItem(page = page)
+        HomeScreen(uiState = uiState)
     }
 }
 
