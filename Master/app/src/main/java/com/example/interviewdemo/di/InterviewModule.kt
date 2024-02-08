@@ -8,6 +8,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 /*
 Hilt modules
@@ -16,10 +18,11 @@ Sometimes a type cannot be constructor-injected. This can happen for multiple re
 A Hilt module is a class that is annotated with @Module. Like a Dagger module, it informs Hilt how to provide instances of certain types. Unlike Dagger modules, you must annotate Hilt modules with @InstallIn to tell Hilt which Android class each module will be used or installed in.
  */
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 object InterviewModule {
 
     //This can be accessed anywhere in the project through DI
+    @Singleton
     @Provides
     fun gsonHomeDataProvider(): Gson {
         return Gson()
