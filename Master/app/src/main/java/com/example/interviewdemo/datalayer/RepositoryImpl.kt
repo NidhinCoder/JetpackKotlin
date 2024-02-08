@@ -27,3 +27,4 @@ class RepositoryImpl @Inject constructor(private val gson: Gson) : Repository {
             return flowOf(homeData.records!!)
     }
 }
+//This is consumed by usecase

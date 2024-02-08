@@ -16,7 +16,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.Card
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.sp
 import com.example.interviewdemo.R
 import com.example.interviewdemo.uilayer.viewmodel.MainViewModel
 
-
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(uiState: State<MainViewModel.InterviewState>) {
@@ -45,7 +44,6 @@ fun HomeScreen(uiState: State<MainViewModel.InterviewState>) {
         )
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
-
             )
         {
 
@@ -54,6 +52,7 @@ fun HomeScreen(uiState: State<MainViewModel.InterviewState>) {
                 modifier = Modifier
                     .fillMaxHeight()
 
+                    //In Illustrator it is 120 pixel.
                     .width(60.dp)
             )
             {
@@ -77,8 +76,18 @@ fun HomeScreen(uiState: State<MainViewModel.InterviewState>) {
                     .width(520.dp)
             )
             {
-                val pagerState = rememberPagerState(pageCount = { 2 })
+                //For demo purpose, 2 pages with a common template Listbox holders
+                //using LazyVertical Grid
+
+                //Decide business logic
+                //number of pages = array.size()/6
+                //
+
+                val numberOfPages = uiState.value.homePageContentMap?.size?:0
+
+                val pagerState = rememberPagerState(pageCount = { numberOfPages })
                 HorizontalPager(state = pagerState) { page ->
+                    val featuresOfCurrentPage = uiState.value.homePageContentMap?.get(page)
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(3),
 
@@ -90,39 +99,44 @@ fun HomeScreen(uiState: State<MainViewModel.InterviewState>) {
                             bottom = 16.dp
                         ),
                         content = {
-                            items(uiState.value.homeData?.size?:0) { index ->
+                            items(featuresOfCurrentPage?.size ?: 0) { index ->
+
                                 Column(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(4.dp),
                                     verticalArrangement = Arrangement.Center,
+                                    horizontalAlignment = Alignment.CenterHorizontally
 
+                                ) {
+                                    Button(onClick = {
 
-                                    ) {
-                                    Image(
-                                        //painter = painterResource(id = uiState.value.homeData?.getOrNull(index)?.image?:R.drawable.seats),
-                                        painter = painterResource(id = getDrawable(uiState)),
-                                        contentDescription = "",
-                                        contentScale = ContentScale.FillBounds//To set the width and height stretch
-                                    )
-
-                                    Text(
-                                        //Study
-                                        text = uiState.value.homeData?.getOrNull(index)?.title?:"",
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 30.sp,
-                                        color = Color(0xFFFFFFFF),
-                                        textAlign = TextAlign.Center,
-                                        modifier = Modifier.padding(16.dp)
-                                    )
+                                    }) {
+                                        Column()
+                                        {
+                                            Image(
+                                                //painter = painterResource(id = uiState.value.homeData?.getOrNull(index)?.image?:R.drawable.seats),
+                                                painter = painterResource(id = featuresOfCurrentPage?.getOrNull(index)?.image?:R.drawable.seats),//getDrawable(uiState)),
+                                                contentDescription = "",
+                                                contentScale = ContentScale.FillBounds,//To set the width and height stretch,
+                                            )
+                                            Text(
+                                                //Study
+                                                text = featuresOfCurrentPage?.getOrNull(index)?.title
+                                                    ?: "",
+                                                fontWeight = FontWeight.Normal,
+                                                fontSize = 12.sp,
+                                                color = Color(0xFFFFFFFF),
+                                                textAlign = TextAlign.Center,
+                                                modifier = Modifier.padding(16.dp)
+                                            )
+                                        }
+                                    }
                                 }
                             }
                         }
                     )
-
                 }
-
-
             }
 
             //Right sidebar
@@ -156,3 +170,6 @@ fun getDrawable(uiState: State<MainViewModel.InterviewState>): Int {
 
     //uiState.value.homeData?.getOrNull(index)?.image?:R.drawable.seats
 }
+
+
+
