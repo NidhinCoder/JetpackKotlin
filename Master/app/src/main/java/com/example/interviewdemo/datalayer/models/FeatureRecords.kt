@@ -1,4 +1,4 @@
-package com.example.interviewdemo.datalayer.Models
+package com.example.interviewdemo.datalayer.models
 
 data class FeatureRecords(
 

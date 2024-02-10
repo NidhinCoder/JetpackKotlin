@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "InterviewDemo"
 include(":app")
- 
+include(":jlrresources")

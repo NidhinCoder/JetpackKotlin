@@ -1,7 +1,7 @@
 package com.example.interviewdemo.datalayer
 
-import com.example.interviewdemo.datalayer.Models.Feature
-import com.example.interviewdemo.datalayer.Models.FeatureRecords
+import com.example.interviewdemo.datalayer.models.Feature
+import com.example.interviewdemo.datalayer.models.FeatureRecords
 import com.example.interviewdemo.utilities.HomeFeaturesStub
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
