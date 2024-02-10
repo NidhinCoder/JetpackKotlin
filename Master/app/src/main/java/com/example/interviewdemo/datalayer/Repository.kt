@@ -1,6 +1,6 @@
 package com.example.interviewdemo.datalayer
 
-import com.example.interviewdemo.datalayer.Models.Feature
+import com.example.interviewdemo.datalayer.models.Feature
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {

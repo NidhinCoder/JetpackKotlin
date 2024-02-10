@@ -3,7 +3,7 @@ package com.example.interviewdemo.uilayer.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.interviewdemo.datalayer.Models.Feature
+import com.example.interviewdemo.datalayer.models.Feature
 import com.example.interviewdemo.domainlayer.UseCase
 import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
