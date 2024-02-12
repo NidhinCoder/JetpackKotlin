@@ -1,21 +1,18 @@
 package com.example.revisionproject.ui.screens
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.example.revisionproject.ui.navigation.Destinations
-import com.example.revisionproject.ui.reusablecomponents.FeatureIButton
+import com.example.reusablecomposefunctions.FeatureIButton
+import com.example.revisionproject.R
 
 
 @Composable
@@ -34,12 +31,26 @@ fun ScreenMain(navController: NavHostController?) {
                 FeatureIButton(onClick = {
                                             navController?.navigate(getScreenRoute(buttonName))
                                          },
-                               imageResourceName = buttonName,
+                               imageResourceId = getImageResourceId(buttonName),
                                featureName =buttonName
                               )
             }
         }
 
+    }
+}
+
+fun getImageResourceId(buttonName: String): Int {
+    return when (buttonName){
+        "seats"-> R.drawable.seats
+        "climate"->R.drawable.climate
+        "lighting"->R.drawable.lighting
+        "blinds"->R.drawable.blinds
+        "rse"->R.drawable.rse
+        "fridge"->R.drawable.fridge
+        "haptic"->R.drawable.haptic
+        "settings"->R.drawable.seats
+        else ->R.drawable.seats
     }
 }
 

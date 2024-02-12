@@ -1,6 +1,6 @@
-package com.example.revisionproject.ui.reusablecomponents
+package com.example.reusablecomposefunctions
 
-import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -16,20 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import com.example.revisionproject.ui.theme.Constants
 
-@SuppressLint("DiscouragedApi")
+
+
 @Composable
-fun FeatureContent(imageResourceName:String,featureName:String,textColor: Color){
-
-    val context = LocalContext.current
-    val drawableId = remember(imageResourceName) {
-        context.resources.getIdentifier(
-            imageResourceName,
-            "drawable",
-            context.packageName
-        )
-    }
+fun FeatureContent(imageResourceID:Int, featureName:String, textColor: Color){
 
     Column(modifier = Modifier.background(Color.Transparent)) {
         Image(
@@ -37,8 +28,8 @@ fun FeatureContent(imageResourceName:String,featureName:String,textColor: Color)
                 .width(Constants.featureItemWidth)
                 .height(Constants.featureItemHeight)
                 .align(Alignment.CenterHorizontally),
-            painter = painterResource(id = drawableId),
-            contentDescription = "",
+                painter = painterResource(id = imageResourceID),
+                contentDescription = "",
         )
         Text(modifier = Modifier.align(Alignment.CenterHorizontally), text = featureName, fontSize = Constants.featureFontSize, color = textColor)
     }
@@ -47,7 +38,7 @@ fun FeatureContent(imageResourceName:String,featureName:String,textColor: Color)
 
 @Composable
 fun FeatureIButton(onClick: () -> Unit,
-                   imageResourceName:String,
+                   imageResourceId:Int,
                    featureName:String) {
 
     val initialColor  =  Color.White
@@ -56,7 +47,7 @@ fun FeatureIButton(onClick: () -> Unit,
     TextButton(
         onClick = onClick) {
         FeatureContent(featureName = featureName,
-                       imageResourceName = imageResourceName,
+                       imageResourceID = imageResourceId,
                        textColor = textColorState.value
                       )
     }

@@ -17,7 +17,6 @@ import com.example.revisionproject.ui.screens.ScreenSettings
 @Composable
 fun Navigation() {
     val navigationController = rememberNavController()
-
     NavHost(navController = navigationController,
             startDestination = Destinations.Home.route){
 

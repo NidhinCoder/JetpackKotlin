@@ -1,4 +1,4 @@
-package com.example.revisionproject.ui.theme
+package com.example.reusablecomposefunctions
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
