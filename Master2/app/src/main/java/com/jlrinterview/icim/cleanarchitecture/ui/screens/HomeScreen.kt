@@ -15,11 +15,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.compose.foundation.layout.Box
+import androidx.compose.runtime.State
 import androidx.compose.ui.unit.dp
+import com.jlrinterview.icim.cleanarchitecture.ui.viewmodel.HomeScreenViewModel
 
 @Composable
-fun HomeScreen(navigationController: NavHostController) {
+fun HomeScreen(uiState: State<HomeScreenViewModel.HomeScreenFeaturesListState>, navigationController: NavHostController) {
 
+    val featuresOfCurrentPage = uiState.value.homeScreenProcessedMap
+    val numberOfPages = featuresOfCurrentPage?.size
+    Text(numberOfPages.toString())
 
 }
 

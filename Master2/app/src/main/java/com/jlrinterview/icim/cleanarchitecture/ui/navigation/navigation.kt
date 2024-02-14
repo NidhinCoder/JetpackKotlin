@@ -9,11 +9,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -31,16 +31,17 @@ import com.jlrinterview.icim.cleanarchitecture.ui.screens.LightingScreen
 import com.jlrinterview.icim.cleanarchitecture.ui.screens.RSEScreen
 import com.jlrinterview.icim.cleanarchitecture.ui.screens.SeatsScreen
 import com.jlrinterview.icim.cleanarchitecture.ui.screens.SettingsScreen
+import com.jlrinterview.icim.cleanarchitecture.ui.viewmodel.HomeScreenViewModel
 
 @Composable
-fun ApplicationGUI() {
+fun ApplicationGUI(uiState: State<HomeScreenViewModel.HomeScreenFeaturesListState>) {
 
     Box(){
 
         BackgroundImage()
 
         //Entire application screens will be rendered on top of background image
-        IcimPanels()
+        IcimPanels(uiState)
 
     }
 
@@ -55,7 +56,7 @@ fun BackgroundImage() {
 }
 
 @Composable
-fun IcimPanels() {
+fun IcimPanels(uiState: State<HomeScreenViewModel.HomeScreenFeaturesListState>) {
 
     //We split the screen to 3 parts
    Row(
@@ -70,7 +71,7 @@ fun IcimPanels() {
 
         //Middle panel area
         //It will contain all the screens and transitions. Content is dynamic
-        MiddlePanel()
+        MiddlePanel(uiState)
 
         //Right sidebar
         SideBar(R.drawable.settings)
@@ -97,23 +98,24 @@ fun SideBar(imageId:Int) {
 }
 
 @Composable
-fun MiddlePanel(){
+fun MiddlePanel(uiState: State<HomeScreenViewModel.HomeScreenFeaturesListState>) {
     Box(modifier= Modifier
         .fillMaxHeight()
         .width(middlePanel_width)){
-        IcimNavigator()
+        IcimNavigator(uiState)
     }
 }
 
 @Composable
-fun IcimNavigator(){
+fun IcimNavigator(uiState: State<HomeScreenViewModel.HomeScreenFeaturesListState>) {
     val navigationController = rememberNavController()
     NavHost(
         navController = navigationController,
         startDestination = DestinationScreens.Home.route
     ) {
 
-        composable(DestinationScreens.Home.route) { HomeScreen(navigationController) }
+
+        composable(DestinationScreens.Home.route) { HomeScreen(uiState,navigationController) }
         composable(DestinationScreens.Seats.route) { SeatsScreen(navigationController) }
         composable(DestinationScreens.Climate.route) { ClimateScreen(navigationController) }
         composable(DestinationScreens.Lighting.route) { LightingScreen(navigationController) }

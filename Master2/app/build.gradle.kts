@@ -1,6 +1,12 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
+    /**
+     * For Hilt
+    * */
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -83,4 +89,24 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+
+    /**
+    * For MQTT client
+    * */
+    implementation ("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.4")
+    implementation ("org.eclipse.paho:org.eclipse.paho.android.service:1.1.1")
+
+    /**
+     * For gson to parse Json sample data
+    * */
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    /**
+     * For Hilt
+     * */
+    implementation("com.google.dagger:hilt-android:2.48.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.48.1")
+
+
 }
