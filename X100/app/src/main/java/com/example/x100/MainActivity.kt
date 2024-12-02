@@ -11,24 +11,28 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.x100.ui.theme.X100Theme
+import dagger.hilt.android.AndroidEntryPoint
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            X100Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            val navController = rememberNavController()
+            NavHost(navController = navController, startDestination = "home") {
+                composable("home") { HomeScreen() }
+                composable("login") { LoginScreen() }
+                composable("register"){ RegisterScreen() }
             }
         }
     }
 }
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
@@ -45,3 +49,4 @@ fun GreetingPreview() {
         Greeting("Android")
     }
 }
+
