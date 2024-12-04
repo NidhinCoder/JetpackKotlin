@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/fragment_one"
+    >
+
+
+    <fragment
+        android:id="@+id/fragment_one"
+        android:name="com.jlrinterview.nidhinnews.ui.theme.fra1"
+
+    android:label="Fragment One"
+    tools:layout="@layout/fragment_fra1" />
+
+
+
+    <action
+        android:id="@+id/action_fragment_one_to_fragment_two"
+        app:destination="@id/fragment_one" />
+
+
+</navigation>
